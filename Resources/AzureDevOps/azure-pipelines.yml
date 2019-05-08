@@ -1,0 +1,42 @@
+variables:
+    SolutionBaseName: 'DFC.Composite.Paths'
+    BuildPlatform: 'any cpu'
+    BuildConfiguration: 'release'
+
+resources:
+  repositories:
+  - repository: self
+  - repository: dfc-devops
+    type: github
+    name: SkillsFundingAgency/dfc-devops
+    ref: refs/tags/v1.1.1
+    endpoint: 'GitHub (ESFA)'
+
+jobs:
+
+# Build the app with the dfc-dotnetcore-build template.  Runs if the output of TestBranchName is Version2+
+- job: BuildArmTemplate
+  displayName: Build-ArmTemplate
+  pool:
+    name: Continuous Integration 02 - SSD - 160ACU
+    demands:
+    - msbuild
+    - visualstudio
+
+  steps:
+  - task: AzurePowerShell@4
+    displayName: 'Test Arm Template'
+    inputs:
+      azureSubscription: 'SFA-DSS-DevTest'
+      scriptType: filePath
+      scriptPath: $(Build.SourcesDirectory)\Resources\Test-CompositeUiTemplate.ps1
+  - task: CopyFiles@2
+    displayName: 'Copy Arm Templates to Staging'
+    inputs:
+      SourceFolder: 'Resources/ArmTemplates/**/*'
+      TargetFolder: $(build.artifactstagingdirectory)/ArmTemplates
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact'
+    inputs:
+      PathtoPublish: '$(build.artifactstagingdirectory)'
+      ArtifactName: 'Azure'
