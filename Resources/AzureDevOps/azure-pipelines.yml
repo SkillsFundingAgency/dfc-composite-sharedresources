@@ -27,7 +27,7 @@ jobs:
   - task: AzurePowerShell@4
     displayName: 'Test Arm Template'
     inputs:
-      azureSubscription: 'SFA-DSS-DevTest'
+      azureSubscription: 'SFA-CDH-Dev/Test (962cae10-2950-412a-93e3-d8ae92b17896)'
       scriptType: filePath
       scriptPath: $(Build.SourcesDirectory)\Resources\Test-CompositeUiTemplate.ps1
   - task: CopyFiles@2
