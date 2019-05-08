@@ -54,6 +54,7 @@ else {
     $DeploymentParameters['Verbose'] = $true
 
     Write-Host "- Validating template"
+    Write-Verbose -Message "Deployment Parameters: `n$DeploymentParameters"
     Test-AzureRmResourceGroupDeployment @DeploymentParameters
     
 }

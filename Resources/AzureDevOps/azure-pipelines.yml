@@ -24,12 +24,13 @@ jobs:
     - visualstudio
 
   steps:
-  - task: AzurePowerShell@4
+  - task: AzurePowerShell@3
     displayName: 'Test Arm Template'
     inputs:
       azureSubscription: 'SFA-CDH-Dev/Test (962cae10-2950-412a-93e3-d8ae92b17896)'
       scriptType: filePath
       scriptPath: $(Build.SourcesDirectory)\Resources\Test-CompositeUiTemplate.ps1
+      scriptArguments: -Verbose
       azurePowerShellVersion: LatestVersion
   - task: CopyFiles@2
     displayName: 'Copy Arm Templates to Staging'
