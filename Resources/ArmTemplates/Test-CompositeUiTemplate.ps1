@@ -6,7 +6,7 @@ param(
 $Location = "West Europe"
 
 $DeploymentParameters = @{
-    TemplateFile          = ".\Resources\ArmTemplates\template.json"
+    TemplateFile          = "$PSScriptRoot\template.json"
 }
 
 if($DeployToOwnTenant.IsPresent) {
@@ -20,7 +20,7 @@ if($DeployToOwnTenant.IsPresent) {
         throw "Logged in to SFA tenant.  Login to your personal tenant to complete a test deployment."
     }
     
-    $DeploymentParameters['TemplateParameterFile'] = ".\Resources\ArmTemplates\test-parameters.json"
+    $DeploymentParameters['TemplateParameterFile'] = "$PSScriptRoot\test-parameters.json"
 
     $TemplateParamsObject = Get-Content $DeploymentParameters['TemplateParameterFile'] | ConvertFrom-Json
 
@@ -47,7 +47,7 @@ if($DeployToOwnTenant.IsPresent) {
 } 
 else {
 
-    $DeploymentParameters['TemplateParameterFile'] = ".\Resources\ArmTemplates\parameters.json"
+    $DeploymentParameters['TemplateParameterFile'] = "$PSScriptRoot\parameters.json"
 
     $ResourceGroupName = "dfc-test-template-rg"
 
