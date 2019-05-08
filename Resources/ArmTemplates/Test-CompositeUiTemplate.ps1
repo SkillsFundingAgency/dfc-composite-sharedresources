@@ -54,7 +54,13 @@ else {
     $DeploymentParameters['Verbose'] = $true
 
     Write-Host "- Validating template"
-    Write-Verbose -Message "Deployment Parameters: `n$DeploymentParameters"
+    if ($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent) {
+
+        Write-Verbose -Message "Deployment Parameters:"
+        $DeploymentParameters
+        
+    }
+    
     Test-AzureRmResourceGroupDeployment @DeploymentParameters
     
 }
