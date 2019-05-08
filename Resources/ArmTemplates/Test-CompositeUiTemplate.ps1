@@ -6,14 +6,12 @@ param(
 $Location = "West Europe"
 
 $DeploymentParameters = @{
-    TemplateParameterFile = ".\Resources\ArmTemplates\test-parameters.json"
     TemplateFile          = ".\Resources\ArmTemplates\template.json"
 }
 
 if($DeployToOwnTenant.IsPresent) {
 
     $IsLoggedIn = (Get-AzureRMContext -ErrorAction SilentlyContinue).Account
-    Get-AzureRmContext
     if (!$IsLoggedIn) {
         Write-Host "Not logged in"
         Login-AzureRmAccount
@@ -22,6 +20,8 @@ if($DeployToOwnTenant.IsPresent) {
         throw "Logged in to SFA tenant.  Login to your personal tenant to complete a test deployment."
     }
     
+    $DeploymentParameters['TemplateParameterFile'] = ".\Resources\ArmTemplates\test-parameters.json"
+
     $TemplateParamsObject = Get-Content $DeploymentParameters['TemplateParameterFile'] | ConvertFrom-Json
 
     $ResourceGroupName = $TemplateParamsObject.parameters.ApimResourceGroup.value
@@ -47,6 +47,8 @@ if($DeployToOwnTenant.IsPresent) {
 } 
 else {
 
+    $DeploymentParameters['TemplateParameterFile'] = ".\Resources\ArmTemplates\parameters.json"
+
     $ResourceGroupName = "dfc-test-template-rg"
 
     $DeploymentParameters['ResourceGroup'] = $ResourceGroupName
@@ -58,7 +60,7 @@ else {
 
         Write-Verbose -Message "Deployment Parameters:"
         $DeploymentParameters
-        
+
     }
     
     Test-AzureRmResourceGroupDeployment @DeploymentParameters
