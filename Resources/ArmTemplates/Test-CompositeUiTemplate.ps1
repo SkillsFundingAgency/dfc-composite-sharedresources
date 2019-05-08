@@ -13,11 +13,13 @@ $DeploymentParameters = @{
 if($DeployToOwnTenant.IsPresent) {
 
     $IsLoggedIn = (Get-AzureRMContext -ErrorAction SilentlyContinue).Account
+    Get-AzureRmContext
     if (!$IsLoggedIn) {
+        Write-Host "Not logged in"
         Login-AzureRmAccount
     }
     elseif ($($IsLoggedIn.Id.split("@")[1] -eq "citizenazuresfabisgov.onmicrosoft.com") -or $($IsLoggedIn.Id.split("@")[1] -eq "fcsazuresfabisgov.onmicrosoft.com")) {
-        throw "Logged in to SFA tenant.  Login to your personal tenant."
+        throw "Logged in to SFA tenant.  Login to your personal tenant to complete a test deployment."
     }
     
     $TemplateParamsObject = Get-Content $DeploymentParameters['TemplateParameterFile'] | ConvertFrom-Json
