@@ -35,7 +35,7 @@ jobs:
   - task: CopyFiles@2
     displayName: 'Copy Arm Templates to Staging'
     inputs:
-      SourceFolder: '$(Build.SourcesDirectory)\Resources\ArmTemplates\**\*'
+      SourceFolder: '$(Build.SourcesDirectory)\Resources\ArmTemplates\'
       TargetFolder: $(build.artifactstagingdirectory)/ArmTemplates
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact'
