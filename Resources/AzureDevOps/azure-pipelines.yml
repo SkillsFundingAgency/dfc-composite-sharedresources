@@ -1,7 +1,5 @@
 variables:
-    SolutionBaseName: 'DFC.Composite.Paths'
-    BuildPlatform: 'any cpu'
-    BuildConfiguration: 'release'
+    ArmTemplateRoot: '$(Build.SourcesDirectory)\Resources\ArmTemplates'
 
 resources:
   repositories:
@@ -23,19 +21,29 @@ jobs:
     - msbuild
     - visualstudio
 
+  variables:
+    TestArmTemplateScriptUrl: https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/NCSD-628-AddResourcesForTestingArm/Scripts/Test-ArmTemplate.ps1
+    TestArmTemplateScriptFilePath: $(System.DefaultWorkingDirectory)\Test-ArmTemplate.ps1
+
   steps:
+  - task: PowerShell@2
+    name: DownloadTestArmTemplateScript
+    displayName: 'Download Test-ArmTemplate script'
+    inputs:
+     targetType: 'inline'
+     script: Invoke-WebRequest -Uri $(TestArmTemplateScriptUrl) -OutFile $(TestArmTemplateScriptFilePath)
   - task: AzurePowerShell@3
     displayName: 'Test Arm Template'
     inputs:
       azureSubscription: 'SFA-CDH-Dev/Test (962cae10-2950-412a-93e3-d8ae92b17896)'
       scriptType: filePath
-      scriptPath: $(Build.SourcesDirectory)\Resources\ArmTemplates\Test-CompositeUiTemplate.ps1
-      scriptArguments: -Verbose
+      scriptPath: $(TestArmTemplateScriptFilePath)
+      scriptArguments: -ParameterFile "$(ArmTemplateRoot)\parameters.json" -TemplateFile "$(ArmTemplateRoot)\template.json" -Verbose
       azurePowerShellVersion: LatestVersion
   - task: CopyFiles@2
     displayName: 'Copy Arm Templates to Staging'
     inputs:
-      SourceFolder: '$(Build.SourcesDirectory)\Resources\ArmTemplates\'
+      SourceFolder: '$(ArmTemplateRoot)\'
       TargetFolder: $(build.artifactstagingdirectory)/ArmTemplates
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact'
