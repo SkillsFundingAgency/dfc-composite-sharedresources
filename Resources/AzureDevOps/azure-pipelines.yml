@@ -22,7 +22,7 @@ jobs:
     - visualstudio
 
   variables:
-    TestArmTemplateScriptUrl: https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/NCSD-628-AddResourcesForTestingArm/Scripts/Test-ArmTemplate.ps1
+    TestArmTemplateScriptUrl: https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/NCSD-628-AddResourcesForTestingArm/PSScripts/Test-ARMTemplate.ps1
     TestArmTemplateScriptFilePath: $(System.DefaultWorkingDirectory)\Test-ArmTemplate.ps1
 
   steps:
