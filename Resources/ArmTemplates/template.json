@@ -32,10 +32,11 @@
     },
     "variables": {
         "ApimProductDisplayName": "Composite UI",
-        "AppServicePlanName": "[tolower(concat('dfc-', parameters('Environment'), '-compositeui-shared-asp'))]",
+        "AppServicePlanName": "[concat(variables('ResourcePrefix'), '-asp')]",
         "BuildingBlocksDfcBaseUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/master/ArmTemplates/",
-        "CosmosDbName": "[tolower(concat('dfc-', parameters('Environment'), '-compositeui-cdb'))]",
-        "StorageAccountName": "[tolower(concat('dfc', parameters('Environment'), 'compositeuistr'))]"
+        "CosmosDbName": "[concat(variables('ResourcePrefix'), '-cdb')]",
+        "ResourcePrefix": "[tolower(concat('dfc-', parameters('Environment'), '-compui-shared'))]",
+        "StorageAccountName": "[tolower(concat('dfc', parameters('Environment'), 'compuistr'))]"
     },
     "resources": [
         {
