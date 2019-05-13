@@ -36,7 +36,7 @@
         "BuildingBlocksDfcBaseUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/master/ArmTemplates/",
         "CosmosDbName": "[concat(variables('ResourcePrefix'), '-cdb')]",
         "ResourcePrefix": "[tolower(concat('dfc-', parameters('Environment'), '-compui-shared'))]",
-        "StorageAccountName": "[tolower(concat('dfc', parameters('Environment'), 'compuistr'))]"
+        "StorageAccountName": "[tolower(concat('dfc', parameters('Environment'), 'compuisharedstr'))]"
     },
     "resources": [
         {
