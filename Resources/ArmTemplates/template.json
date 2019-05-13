@@ -9,13 +9,16 @@
             "type": "string"
         },
         "AseHostingEnvironmentName": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": ""
         },
         "AseOutboundIpAddress": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": ""
         },
         "AseResourceGroup": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": ""
         },
         "AspSize": {
             "type": "string"
