@@ -1,0 +1,30 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "ApimResourceGroup": {
+            "value": "dfc-dev-shared-rg"
+        },
+        "ApimServiceName": {
+            "value": "dfc-dev-shared-apim"
+        },
+        "AseHostingEnvironmentName": {
+            "value": ""
+        },
+        "AseOutboundIpAddress": {
+            "value": ""
+        },
+        "AseResourceGroup": {
+            "value": ""
+        },
+        "AspSize": {
+            "value": "1"
+        },
+        "AspTier": {
+            "value": "Standard"
+        },
+        "Environment": {
+            "value": "FOO"
+        }
+    }
+}
