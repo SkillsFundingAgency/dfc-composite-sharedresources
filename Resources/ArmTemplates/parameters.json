@@ -3,28 +3,28 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "ApimResourceGroup": {
-            "value": "dfc-dev-shared-rg"
+            "value": "__SharedResourceGroupName__"
         },
         "ApimServiceName": {
-            "value": "dfc-dev-shared-apim"
+            "value": "__ApimServiceName__"
         },
         "AseHostingEnvironmentName": {
-            "value": ""
+            "value": "__AseHostingEnvironmentName__"
         },
         "AseOutboundIpAddress": {
-            "value": ""
+            "value": "__AseOutboundIpAddress__"
         },
         "AseResourceGroup": {
-            "value": ""
+            "value": "__SharedResourceGroupName__"
         },
         "AspSize": {
-            "value": "1"
+            "value": "__AspSize__"
         },
         "AspTier": {
-            "value": "Standard"
+            "value": "__AspTier__"
         },
         "Environment": {
-            "value": "FOO"
+            "value": "__ReleaseEnvironmentName__"
         }
     }
 }
