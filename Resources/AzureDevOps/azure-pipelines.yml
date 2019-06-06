@@ -1,5 +1,6 @@
 variables:
     ArmTemplateRoot: '$(Build.SourcesDirectory)\Resources\ArmTemplates'
+    SolutionBaseName: 'DFC.Composite.SharedResources'
 
 resources:
   repositories:
@@ -29,4 +30,4 @@ jobs:
     displayName: 'Publish Artifact'
     inputs:
       PathtoPublish: '$(build.artifactstagingdirectory)'
-      ArtifactName: 'Azure'
+      ArtifactName: $(SolutionBaseName)
