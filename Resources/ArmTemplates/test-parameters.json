@@ -25,6 +25,15 @@
         },
         "Environment": {
             "value": "FOO"
+        },
+        "cosmosDatabaseName": {
+            "value": "SomeDatabase"
+        },
+        "cosmosDatabaseThroughput": {
+            "value": 400
+        },
+        "cosmosDatabaseNeedsCreation": {
+            "value": false
         }
     }
 }

@@ -25,6 +25,15 @@
         },
         "Environment": {
             "value": "__ReleaseEnvironmentName__"
+        },
+        "cosmosDatabaseName": {
+            "value": "composition"
+        },
+        "cosmosDatabaseThroughput": {
+            "value": __CosmosDatabaseThroughput__
+        },
+        "cosmosDatabaseNeedsCreation": {
+            "value": __CosmosDbDatabaseExists__
         }
     }
 }
