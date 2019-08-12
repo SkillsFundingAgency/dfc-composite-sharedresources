@@ -28,6 +28,15 @@
         },
         "Environment": {
             "type": "string"
+        },
+        "cosmosDatabaseName": {
+            "type": "string"
+        },
+        "cosmosDatabaseThroughput": {
+            "type": "int"
+        },
+        "cosmosDatabaseNeedsCreation": {
+            "type": "bool"
         }
     },
     "variables": {
@@ -138,6 +147,38 @@
                     },
                     "additionalIpAddresses": {
                         "value": "[parameters('AseOutboundIpAddress')]"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "[concat(variables('CosmosDbName'), '-', parameters('cosmosDatabaseName'))]",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "[variables('CosmosDbName')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('BuildingBlocksDfcBaseUrl'), 'CosmosDb/cosmos-database.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "accountName": {
+                        "value": "[variables('CosmosDbName')]"
+                    },
+                    "databaseName": {
+                        "value": "[parameters('cosmosDatabaseName')]"
+                    },
+                    "useSharedRequestUnits": {
+                        "value": true
+                    },
+                    "offerThroughput": {
+                        "value": "[int(parameters('cosmosDatabaseThroughput'))]"
+                    },
+                    "databaseNeedsCreation": {
+                        "value": "[bool(parameters('cosmosDatabaseNeedsCreation'))]"
                     }
                 }
             }
