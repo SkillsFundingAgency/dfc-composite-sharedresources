@@ -33,7 +33,7 @@
             "value": __CosmosDatabaseThroughput__
         },
         "cosmosDatabaseNeedsCreation": {
-            "value": __CosmosDbDatabaseExists__
+            "value": __CosmosDbDatabaseDoesntExist__
         }
     }
 }
