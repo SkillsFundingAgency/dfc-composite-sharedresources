@@ -9,7 +9,7 @@
             "value": "__ApimServiceName__"
         },
         "AseHostingEnvironmentName": {
-            "value": "__AseHostingEnvironmentName__"
+            "value": "__AseServiceName__"
         },
         "AseOutboundIpAddress": {
             "value": "__AseOutboundIpAddress__"
