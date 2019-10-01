@@ -132,7 +132,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[concat('https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/NCSD-1757-CosmosOptionalAzureDCAccess/ArmTemplates/', 'cosmos-db.json')]",
+                    "uri": "[concat(variables('BuildingBlocksDfcBaseUrl'), 'cosmos-db.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
