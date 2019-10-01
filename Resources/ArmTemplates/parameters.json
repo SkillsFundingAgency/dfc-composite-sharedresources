@@ -9,7 +9,7 @@
             "value": "__ApimServiceName__"
         },
         "AseHostingEnvironmentName": {
-            "value": "__AseHostingEnvironmentName__"
+            "value": "__AseServiceName__"
         },
         "AseOutboundIpAddress": {
             "value": "__AseOutboundIpAddress__"
@@ -33,7 +33,7 @@
             "value": __CosmosDatabaseThroughput__
         },
         "cosmosDatabaseNeedsCreation": {
-            "value": __CosmosDbDatabaseExists__
+            "value": __CosmosDbDatabaseDoesntExist__
         }
     }
 }
