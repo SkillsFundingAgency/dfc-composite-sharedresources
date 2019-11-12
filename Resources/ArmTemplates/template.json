@@ -40,7 +40,8 @@
         }
     },
     "variables": {
-        "ApimProductDisplayName": "Composite UI",
+        "ApimCompositeProductDisplayName": "Composite UI",
+        "ApimJobProfilesProductDisplayName": "Job Profiles",
         "AppServicePlanName": "[concat(variables('ResourcePrefix'), '-asp')]",
         "BuildingBlocksDfcBaseUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/master/ArmTemplates/",
         "CosmosDbName": "[concat(variables('ResourcePrefix'), '-cdb')]",
@@ -64,7 +65,7 @@
                         "value": "[parameters('ApimServiceName')]"
                     },
                     "productDisplayName": {
-                        "value": "[variables('ApimProductDisplayName')]"
+                        "value": "[variables('ApimCompositeProductDisplayName')]"
                     }
                 }
             }
@@ -88,7 +89,31 @@
                         "value": "[parameters('ApimServiceName')]"
                     },
                     "productDisplayName": {
-                        "value": "[variables('ApimProductDisplayName')]"
+                        "value": "[variables('ApimCompositeProductDisplayName')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "jobprofiles-apim-product",
+            "type": "Microsoft.Resources/deployments",
+            "resourceGroup": "[parameters('ApimResourceGroup')]",
+            "apiVersion": "2017-05-10",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('BuildingBlocksDfcBaseUrl'), 'APIM/apim-product.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "allowAnonymousAccess": {
+                        "value": false
+                    },
+                    "apimServiceName": {
+                        "value": "[parameters('ApimServiceName')]"
+                    },
+                    "productDisplayName": {
+                        "value": "[variables('ApimJobProfilesProductDisplayName')]"
                     }
                 }
             }
