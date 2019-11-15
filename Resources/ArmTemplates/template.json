@@ -85,6 +85,9 @@
                     "allowAnonymousAccess": {
                         "value": false
                     },
+                    "allowDevelopers": {
+                        "value": true
+                    },
                     "apimServiceName": {
                         "value": "[parameters('ApimServiceName')]"
                     },
