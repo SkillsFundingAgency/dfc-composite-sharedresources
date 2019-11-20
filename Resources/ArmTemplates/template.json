@@ -90,7 +90,7 @@
                     }
                 }
             }
-        }
+        },
         {
             "name": "compositeui-apim-product",
             "type": "Microsoft.Resources/deployments",
