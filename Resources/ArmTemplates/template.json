@@ -71,6 +71,27 @@
             }
         },
         {
+            "name": "jobprofiles-apim-logger",
+            "type": "Microsoft.Resources/deployments",
+            "resourceGroup": "[parameters('ApimResourceGroup')]",
+            "apiVersion": "2017-05-10",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('BuildingBlocksDfcBaseUrl'), 'APIM/apim-logger.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "apimServiceName": {
+                        "value": "[parameters('ApimServiceName')]"
+                    },
+                    "productDisplayName": {
+                        "value": "[variables('ApimJobProfilesProductDisplayName')]"
+                    }
+                }
+            }
+        }
+        {
             "name": "compositeui-apim-product",
             "type": "Microsoft.Resources/deployments",
             "resourceGroup": "[parameters('ApimResourceGroup')]",
