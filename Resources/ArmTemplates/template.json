@@ -44,20 +44,13 @@
                 "description": "the token (everything after https://hooks.slack.com/services/) for an incoming webhook in slack"
             }
         },
-        "enableAlerts": {
-            "type": "bool",
-            "metadata": {
-                "description": "Enable the alerts on the action group"
-            }
-        },
-        "SlackChannelForAlerts": {
+        "slackChannelForAlerts": {
             "type": "string",
-            "defaultValue": "",
             "metadata": {
                 "description": "The slack channel to send alerts to"
             }
         },
-        "EmailAddressForAlerts": {
+        "emailAddressForAlerts": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
@@ -66,6 +59,7 @@
         }
     },
     "variables": {
+        "EnableAlerts": "[contains(createArray('PP', 'PRD'), toUpper(parameters('Environment')))]",
         "ApimCompositeProductDisplayName": "Composite UI",
         "AppServicePlanName": "[concat(variables('ResourcePrefix'), '-asp')]",
         "BuildingBlocksDfcBaseUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/master/ArmTemplates/",
@@ -324,13 +318,13 @@
                         "value": "[variables('ActionGroupName')]"
                     },
                     "enabled": {
-                        "value": "[parameters('enableAlerts')]"
+                        "value": "[variables('EnableAlerts')]"
                     },
                     "webHookUrl": {
-                        "value": "[concat('https://', variables('MonitoringFunctionAppName'), '.azurewebsites.net/api/MonitorAlert?code=', listkeys(concat(resourceId('Microsoft.Web/sites', variables('MonitoringFunctionAppName')), '/host/default'), '2018-11-01').functionKeys.default, '&channel=', parameters('SlackChannelForAlerts'))]"
+                        "value": "[concat('https://', variables('MonitoringFunctionAppName'), '.azurewebsites.net/api/MonitorAlert?code=', listkeys(concat(resourceId('Microsoft.Web/sites', variables('MonitoringFunctionAppName')), '/host/default'), '2018-11-01').functionKeys.default, '&channel=', parameters('slackChannelForAlerts'))]"
                     },
                     "emailAddress": {
-                        "value": "[parameters('EmailAddressForAlerts')]"
+                        "value": "[parameters('emailAddressForAlerts')]"
                     }
                 }
             },
@@ -350,7 +344,7 @@
                 },
                 "parameters": {
                     "enabled": {
-                        "value": "[parameters('enableAlerts')]"
+                        "value": "[variables('EnableAlerts')]"
                     },
                     "alertName": {
                         "value": "[concat(variables('AppServicePlanName'), '-metric-CPUPercentage')]"
@@ -401,7 +395,7 @@
                 },
                 "parameters": {
                     "enabled": {
-                        "value": "[parameters('enableAlerts')]"
+                        "value": "[variables('EnableAlerts')]"
                     },
                     "alertName": {
                         "value": "[concat(variables('AppServicePlanName'), '-metric-MemoryPercentage')]"
@@ -452,7 +446,7 @@
                 },
                 "parameters": {
                     "enabled": {
-                        "value": "[parameters('enableAlerts')]"
+                        "value": "[variables('EnableAlerts')]"
                     },
                     "alertName": {
                         "value": "[concat(variables('CosmosDbName'), '-metric-conflicts')]"
@@ -500,8 +494,6 @@
                 "[variables('AppServicePlanName')]"
             ]
         }
-        // CosmosDb
-
     ],
     "outputs": {}
 }

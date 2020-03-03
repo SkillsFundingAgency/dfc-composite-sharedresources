@@ -34,6 +34,12 @@
         },
         "cosmosDatabaseNeedsCreation": {
             "value": false
+        },
+        "slackWebHookToken": {
+            "value": "a-slack-webhook-token"
+        },
+        "slackChannelForAlerts": {
+            "value": "a-slack-channel"
         }
     }
 }
