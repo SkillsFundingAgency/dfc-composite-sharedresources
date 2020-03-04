@@ -276,11 +276,11 @@
                         },
                         {
                             "name": "AzureWebJobsStorage",
-                            "value": "[reference(variables('StorageAccountName')).outputs.storageConnectionString]"
+                            "value": "[reference(variables('StorageAccountName')).outputs.storageConnectionString.value]"
                         },
                         {
                             "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-                            "value": "[reference(variables('StorageAccountName')).outputs.storageConnectionString]"
+                            "value": "[reference(variables('StorageAccountName')).outputs.storageConnectionString.value]"
                         },
                         {
                             "name": "WEBSITE_CONTENTSHARE",
