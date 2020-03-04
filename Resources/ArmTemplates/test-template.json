@@ -1,0 +1,103 @@
+﻿{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "apiVersion": "2017-05-10",
+            "name": "dfcmgsharedstr",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/master/ArmTemplates/storage-account.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "storageAccountName": {
+                        "value": "dfcmgsharedstr"
+                    },
+                    "storageKind": {
+                        "value": "StorageV2"
+                    }
+                }
+            }
+        },
+        {
+            "name": "dfc-mg-shared-mon-asp",
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2018-02-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "name": "dfc-mg-shared-mon-asp",
+                "computeMode": "Dynamic"
+            },
+            "sku": {
+                "name":"Y1",
+                "tier":"Dynamic"
+            }
+        },
+        {
+            "apiVersion": "2015-05-01",
+            "name": "dfc-mg-shared-mon-ai",
+            "type": "Microsoft.Insights/components",
+            "location": "[resourceGroup().location]",
+            "kind": "web",
+            "tags": {
+                "[concat('hidden-link:', resourceId('Microsoft.Web/sites', 'dfc-mg-shared-mon-fa'))]": "Resource"
+            },
+            "properties": {
+                "Application_Type": "web"
+            }
+        },
+        {
+            "name": "dfc-mg-shared-mon-fa",
+            "apiVersion": "2018-11-01",
+            "type": "Microsoft.Web/sites",
+            "location": "[resourceGroup().location]",
+            "kind": "functionapp",
+            "dependsOn": [
+                "dfc-mg-shared-mon-asp",
+                "dfc-mg-shared-mon-ai",
+                "dfcmgsharedstr"
+            ],
+            "properties": {
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                            "value": "[reference(concat('microsoft.insights/components/', 'dfc-mg-shared-mon-ai')).InstrumentationKey]"
+                        },
+                        {
+                            "name": "AzureWebJobsStorage",
+                            "value": "[reference('dfcmgsharedstr').outputs.storageConnectionString.value]"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                            "value": "[reference('dfcmgsharedstr').outputs.storageConnectionString.value]"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTSHARE",
+                            "value": "dfc-mg-shared-mon-fa"
+                        },
+                        {
+                            "name": "FUNCTIONS_WORKER_RUNTIME",
+                            "value": "powershell"
+                        },
+                        {
+                            "name": "FUNCTIONS_EXTENSION_VERSION",
+                            "value": "~2"
+                        },
+                        {
+                            "name": "MSDEPLOY_RENAME_LOCKED_FILES",
+                            "value": "1"
+                        },
+                        {
+                            "name": "SlackToken",
+                            "value": "SomeSlackToken"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

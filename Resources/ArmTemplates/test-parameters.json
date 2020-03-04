@@ -40,6 +40,9 @@
         },
         "slackChannelForAlerts": {
             "value": "a-slack-channel"
+        },
+        "enableAlerts": {
+            "value": false
         }
     }
 }
