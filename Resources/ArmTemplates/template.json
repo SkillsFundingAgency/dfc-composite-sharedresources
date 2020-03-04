@@ -237,14 +237,11 @@
             "location": "[resourceGroup().location]",
             "properties": {
                 "name": "[variables('MonitoringAppServicePlanName')]",
-                "computeMode": "Dynamic",
-                "sku": {
-                    "name":"Y1",
-                    "tier":"Dynamic",
-                    "size":"Y1",
-                    "family":"Y",
-                    "capacity":0
-                }
+                "computeMode": "Dynamic"
+            },
+            "sku": {
+                "name":"Y1",
+                "tier":"Dynamic"
             }
         },
         {
