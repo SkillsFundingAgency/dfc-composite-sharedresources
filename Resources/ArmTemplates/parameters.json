@@ -43,6 +43,9 @@
         },
         "emailAddressForAlerts": {
             "value": "__emailAddressForAlerts__"
+        },
+        "enableAlerts": {
+            "value": __EnableAzureMonitorAlerting__
         }
     }
 }
