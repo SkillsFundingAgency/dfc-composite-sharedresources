@@ -17,7 +17,7 @@ jobs:
 - job: BuildArmTemplate
   displayName: Build-ArmTemplate
   pool:
-    name: Continuous Integration 02 - SSD - 160ACU
+    name: NCS - CI and CD
     demands:
     - msbuild
     - visualstudio
