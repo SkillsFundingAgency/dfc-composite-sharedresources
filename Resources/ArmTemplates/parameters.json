@@ -46,6 +46,12 @@
         },
         "enableAlerts": {
             "value": __EnableAzureMonitorAlerting__
+        },
+        "cpuPercentageThreshold": {
+            "value": "__cpuPercentageThreshold__"
+        },
+        "memoryPercentageThreshold": {
+            "value": "__memoryPercentageThreshold__"
         }
     }
 }

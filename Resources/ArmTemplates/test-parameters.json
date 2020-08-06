@@ -43,6 +43,12 @@
         },
         "enableAlerts": {
             "value": false
+        },
+        "cpuPercentageThreshold": {
+            "value": "90"
+        },
+        "memoryPercentageThreshold": {
+            "value": "90"
         }
     }
 }
