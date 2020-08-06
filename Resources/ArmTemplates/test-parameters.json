@@ -23,6 +23,9 @@
         "AspTier": {
             "value": "Standard"
         },
+        "aspInstances": {
+            "value": 2
+        },
         "Environment": {
             "value": "FOO"
         },
