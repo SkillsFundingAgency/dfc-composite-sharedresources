@@ -17,6 +17,9 @@
         "AseResourceGroup": {
             "value": "__SharedResourceGroupName__"
         },
+        "aspInstances": {
+            "value": __AspInstances__
+        },
         "AspSize": {
             "value": "__AspSize__"
         },
