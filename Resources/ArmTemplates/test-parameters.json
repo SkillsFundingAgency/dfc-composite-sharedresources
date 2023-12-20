@@ -52,6 +52,12 @@
         },
         "memoryPercentageThreshold": {
             "value": "90"
+        },
+        "workspaceName": {
+            "value": "aTestLogAnalyticsAccount"
+        },
+        "workspaceResourceGroup": {
+            "value": "aResourceGroup"
         }
     }
 }

@@ -71,6 +71,12 @@
         },
         "memoryPercentageThreshold": {
             "type": "string"
+        },
+        "workspaceName": {
+            "type": "string"
+        },
+        "workspaceResourceGroup": {
+            "type": "string"
         }
     },
     "variables": {
@@ -103,6 +109,12 @@
                     },
                     "productDisplayName": {
                         "value": "[variables('ApimCompositeProductDisplayName')]"
+                    },
+                    "workspaceName": {
+                        "value": "[parameters('workspaceName')]"
+                    },
+                    "workspaceResourceGroup": {
+                        "value": "[parameters('workspaceResourceGroup')]"
                     }
                 }
             }
@@ -259,7 +271,7 @@
             }
         },
         {
-            "apiVersion": "2015-05-01",
+            "apiVersion": "2020-02-02",
             "name": "[variables('MonitoringAppInsightsName')]",
             "type": "Microsoft.Insights/components",
             "location": "[resourceGroup().location]",
@@ -268,7 +280,8 @@
                 "[concat('hidden-link:', resourceId('Microsoft.Web/sites', variables('MonitoringAppInsightsName')))]": "Resource"
             },
             "properties": {
-                "Application_Type": "web"
+                "Application_Type": "web",
+                "workspaceResourceId": "[resourceId(parameters('workspaceResourceGroup'), 'Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]"
             }
         },
         {
