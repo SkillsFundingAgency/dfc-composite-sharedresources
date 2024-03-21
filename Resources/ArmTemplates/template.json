@@ -196,7 +196,8 @@
                         "value": [
                             {
                                 "name": "CompositeUISharedCosmosConnectionString",
-                                "secret": "[concat('AccountEndpoint=https://', variables('CosmosDbName'), '.documents.azure.com:443/;AccountKey=', listKeys(resourceId('Microsoft.DocumentDb/databaseAccounts', variables('CosmosDbName')), '2023-11-15').primaryMasterKey, ';')]"
+                                "secret": "[concat('AccountEndpoint=https://', variables('CosmosDbName'), '.documents.azure.com:443/;AccountKey=', listKeys(resourceId('Microsoft.DocumentDb/databaseAccounts', variables('CosmosDbName')), '2023-11-15').primaryMasterKey, ';')]",
+                                "type": ""
                             }
                         ]
                     }
