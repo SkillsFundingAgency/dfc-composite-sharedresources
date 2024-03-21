@@ -196,7 +196,7 @@
                         "value": [
                             {
                                 "name": "CompositeUISharedComosDatabase",
-                                "secret": "[concat('AccountEndpoint=https://', variables('CosmosDbName'), '.documents.azure.com:443/;AccountKey=', listKeys(resourceId('Microsoft.DocumentDb/databaseAccounts', variables('CosmosDbName')), '2019-08-1').primaryMasterKey, ';')]",
+                                "secret": "[concat('AccountEndpoint=https://', variables('CosmosDbName'), '.documents.azure.com:443/;AccountKey=', listKeys(resourceId('Microsoft.DocumentDb/databaseAccounts', variables('CosmosDbName')), '2023-11-15').primaryMasterKey, ';')]",
                                 "type": "Microsoft.KeyVault/vaults/secrets"
                             }
                         ]
