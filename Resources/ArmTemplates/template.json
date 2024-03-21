@@ -195,9 +195,8 @@
                     "secrets": {
                         "value": [
                             {
-                                "name": "CompositeUISharedComosDatabase",
-                                "secret": "[concat('AccountEndpoint=https://', variables('CosmosDbName'), '.documents.azure.com:443/;AccountKey=', listKeys(resourceId('Microsoft.DocumentDb/databaseAccounts', variables('CosmosDbName')), '2023-11-15').primaryMasterKey, ';')]",
-                                "type": "Microsoft.KeyVault/vaults/secrets"
+                                "name": "CompositeUISharedCosmosConnectionString",
+                                "secret": "[concat('AccountEndpoint=https://', variables('CosmosDbName'), '.documents.azure.com:443/;AccountKey=', listKeys(resourceId('Microsoft.DocumentDb/databaseAccounts', variables('CosmosDbName')), '2023-11-15').primaryMasterKey, ';')]"
                             }
                         ]
                     }
