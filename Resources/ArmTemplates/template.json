@@ -90,7 +90,7 @@
         "MonitoringAppInsightsName": "[concat(variables('ResourcePrefix'), '-mon-ai')]",
         "MonitoringFunctionAppName": "[concat(variables('ResourcePrefix'), '-mon-fa')]",
         "ActionGroupName": "[concat(variables('ResourcePrefix'), '-actgrp')]",
-        "SharedResourceGroupName": "[concat(variables('ResourcePrefix'), '-shared-rg')]",
+        "SharedResourceGroupName": "[concat('dfc-', parameters('Environment'), '-shared-rg')]",
         "SharedKeyVaultName": "[concat('dfc-', parameters('Environment'), '-shared-kv')]"
     },
     "resources": [
