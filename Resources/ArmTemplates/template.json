@@ -89,7 +89,9 @@
         "MonitoringAppServicePlanName": "[concat(variables('ResourcePrefix'), '-mon-asp')]",
         "MonitoringAppInsightsName": "[concat(variables('ResourcePrefix'), '-mon-ai')]",
         "MonitoringFunctionAppName": "[concat(variables('ResourcePrefix'), '-mon-fa')]",
-        "ActionGroupName": "[concat(variables('ResourcePrefix'), '-actgrp')]"
+        "ActionGroupName": "[concat(variables('ResourcePrefix'), '-actgrp')]",
+        "SharedResourceGroupName": "[concat(variables('ResourcePrefix'), '-shared-rg')]",
+        "SharedKeyVaultName": "[concat(variables('ResourcePrefix'), '-shared-kv')]"
     },
     "resources": [
         {
@@ -168,6 +170,36 @@
                     },
                     "allowConnectionsFromAzureDataCenters": {
                         "value": false
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "resourceGroup": "[variables('SharedResourceGroupName')]",
+            "name": "[concat(variables('SharedKeyVaultName'), '-secret-ConnectionString')]",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "[variables('CosmosDbName')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('BuildingBlocksDfcBaseUrl'), 'KeyVault/keyvault-secrets.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "keyVaultName": {
+                        "value": "[variables('SharedKeyVaultName')]"
+                    },
+                    "secrets": {
+                        "value": [
+                            {
+                                "name": "CompositeUISharedComosDatabase",
+                                "secret": "[concat('AccountEndpoint=https://', variables('CosmosDbName'), '.documents.azure.com:443/;AccountKey=', listKeys(resourceId('Microsoft.DocumentDb/databaseAccounts', variables('CosmosDbName')), '2019-08-1').primaryMasterKey, ';')]",
+                                "type": "Microsoft.KeyVault/vaults/secrets"
+                            }
+                        ]
                     }
                 }
             }
